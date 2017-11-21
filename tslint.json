@@ -1,0 +1,17 @@
+{
+    "rules": {
+        "new-parens": true,
+        "max-line-length": {
+            "options": [120]
+        },
+        "no-arg": true,
+        "no-bitwise": true,
+        "no-conditional-assignment": true,
+        "no-consecutive-blank-lines": false
+    },
+    "jsRules": {
+        "max-line-length": {
+            "options": [120]
+        }
+    }
+}

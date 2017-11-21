@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+      "target": "es6",
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "removeComments": true,
+      "noImplicitAny": false,
+      "outDir": "build/"
+    },
+    "include": [
+      "app.ts",
+      "routes/**/*.ts"
+    ],
+    "exclude": [
+      "node_modules"
+    ],
+    "compileOnSave": false
+  }

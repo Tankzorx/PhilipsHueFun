@@ -1,0 +1,31 @@
+{
+  "name": "projecthomelighting",
+  "version": "1.0.0",
+  "description": "Home lighting for kastrupvej 2.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "node_modules/.bin/tsc",
+    "build": "node_modules/.bin/tsc",
+    "start": "node build/main.js"
+  },
+  "author": "Gustav Jonsson",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2",
+    "morgan": "^1.9.0",
+    "node-hue-api": "^2.4.2",
+    "react": "^16.1.1",
+    "react-dom": "^16.1.1",
+    "typescript": "^2.6.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.0.39",
+    "@types/node": "^8.0.53",
+    "grunt": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-ts": "^5.5.1",
+    "grunt-tslint": "^5.0.1",
+    "tslint": "^5.8.0"
+  }
+}

@@ -1,0 +1,30 @@
+.HueInfo {
+    background-color: rgba(0, 153, 255, 0.856);
+}
+
+.HueLightInfo {
+    display: block;
+}
+
+.hue-light {
+    border: 1px rgba(94, 92, 92, 0.384) solid;
+    margin: 5px 5px;
+    padding: 10px;
+}
+
+.flexcontainer {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+}
+
+.on {
+    background-color: rgba(49, 231, 49, 0.212);
+}
+
+.off {
+    background-color: rgba(255, 146, 146, 0.397);
+}
