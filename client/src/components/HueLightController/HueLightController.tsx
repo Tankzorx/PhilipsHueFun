@@ -11,6 +11,7 @@ interface HueLightControllerState {
 
 interface HueLightControllerProps {
   light: HueLight;
+  onLightStateChange: any;
 }
 
 class HueLightController extends React.Component<HueLightControllerProps, HueLightControllerState> {
@@ -25,7 +26,11 @@ class HueLightController extends React.Component<HueLightControllerProps, HueLig
       }
     this.handleSwitch = this.handleSwitch.bind(this)
   }
-
+  
+  private setStateWrapper (stateChangeFunc: any) {
+      this.setState((prevState) => stateChangeFunc(prevState))
+      this.props.onLightStateChange(this.state.light.state)
+  }
 
   componentDidMount() {
     this.setState( (prevState) => {
@@ -37,12 +42,7 @@ class HueLightController extends React.Component<HueLightControllerProps, HueLig
     this.state.socket.on('stateChanged', (result: any) => {
       console.log('state Change:', result)
       console.log('old state:', this.state)
-      this.setState((prevState) => {
-        const t = {
-          ...prevState.light.state,
-          ...result
-        }
-        console.log(t)
+      this.setStateWrapper((prevState: HueLightControllerProps) => {
         return {
           light: {
             state: {
@@ -52,7 +52,6 @@ class HueLightController extends React.Component<HueLightControllerProps, HueLig
           }
         }
       })
-      console.log('new state:', this.state)
     })
   }
 
