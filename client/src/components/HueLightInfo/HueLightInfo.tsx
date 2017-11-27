@@ -2,10 +2,9 @@
 import * as React from 'react';
 
 import { HueLight } from '../HueOverview/HueOverview'
-// import HueLightState from '../HueLightState/HueLightState'
+import HueLightController from '../HueLightController/HueLightController'
 
 interface HueLightInfoProps {
-  socket: SocketIOClient.Socket;
   light: HueLight;
 }
 
@@ -47,8 +46,6 @@ class HueLightInfo extends React.Component<HueLightInfoProps, HueLightInfoState>
     //         }
     //     })
     // })
-    
-
   }
 
   public render() {
@@ -65,6 +62,7 @@ class HueLightInfo extends React.Component<HueLightInfoProps, HueLightInfoState>
                         this.state.showDetails ? 
                         <div>
                             Details show!
+                            <HueLightController light={this.props.light}/>
                         </div>
                         :
                         <div>

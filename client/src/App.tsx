@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as io from 'socket.io-client'
 import './App.css';
 
 import HueOverview from './components/HueOverview/HueOverview'
@@ -21,7 +20,7 @@ class App extends React.Component<{}, AppState> {
 
   constructor(props: {}) {
     super(props);
-    this.socket = io('localhost:8080')
+    this
     this.state = { users: []};
   }
 
@@ -39,7 +38,7 @@ class App extends React.Component<{}, AppState> {
     return (
       <div className="App">
         <div>
-          <HueOverview socket={this.socket} />
+          <HueOverview />
         </div>
       </div>
     );

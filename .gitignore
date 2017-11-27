@@ -3,4 +3,5 @@ client/node_modules/**
 react-backend/node_modules/**
 build/**
 react-backend/build/**
-.tscache/**
+**/.tscache/**
+.vscode/**

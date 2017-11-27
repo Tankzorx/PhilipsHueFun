@@ -5,7 +5,6 @@ import './HueOverview.css';
 import HueLightInfo from '../HueLightInfo/HueLightInfo'
 
 interface HueInfoProps {
-  socket: SocketIOClient.Socket;
 }
 
 export interface HueLight {
@@ -59,7 +58,7 @@ class HueRegister extends React.Component<HueInfoProps, HueInfoState> {
   public render() {
     const lightComponents = this.state.hueLights.map((light) => {
       return (
-          <HueLightInfo light={light} socket={this.props.socket}/>
+          <HueLightInfo light={light}/>
       )
     })
 

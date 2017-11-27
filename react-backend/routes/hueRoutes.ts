@@ -4,55 +4,37 @@ var router = express.Router();
 var server = require('http').createServer();
 var io = require("socket.io")(server)
 
+
+/**
+ * Set up hue api and socket.io
+ */
 const data = {
   bridgeIp: "192.168.0.17",
   username: "uFU2e7sEn7I0aHr5zD00eurb8jrkscqOEgnYjeNI"
 }
 
-interface ioHueRequest {
-  lights?: string[] | 'all';
-}
-
 const hueApi = new HueApi(data.bridgeIp, data.username);
 
+hueApi.lights().then( (result) => {
+  for (const light of result.lights) {
+    console.log('Creating socket for light: ', light.id)
+    const lightSocket = io.of(`/${light.id}`)
+    lightSocket.on('connection', (socket) => {
+      console.log(`Connected light '${light.id}'`)
 
-io.on("connection", (client: SocketIO.Socket) => {
-  console.log('user connected')
-  client.on('event', function(data) {
-    console.log(data)
-  })
-
-  client.on('disconnect', () => {
-    console.log("disconnected")
-  })
-
-  client.on('one', (value) => {
-    console.log(value)
-  })
-
-  client.on('requestHueData', (req) => {
-    console.log(req)
-
-    // for (let reqProp in req) {
-    //   switch (reqProp) {
-    //     case "lights": 
-    //       if (req.lights === 'all') {
-    //         hueApi.lights().then((lights) => {
-    //           client.emit('HueAllLights', lights)
-    //         })
-    //       } else {
-    //         hueApi.lights().then((lights) => {
-    //           client.emit(`HueLight${req.lights}`, lights[req.lights])
-    //         })
-    //       }
-    //       break;
-    //   }
-    // }
-  })
+      socket.on('disconnect', () => { console.log(`Disconnected light '${light.id}'`) })
+      socket.on('requestStateChange', (requestedState) => {
+        console.log(`New request for lamp: ${light.id}! \n ${JSON.stringify(requestedState)}`)
+        hueApi.setLightState(light.id, requestedState)
+        .then((result) => {
+          lightSocket.emit('stateChanged', requestedState)
+        })
+      })
+    })
+  }
 })
 
 server.listen(8080);
-
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
