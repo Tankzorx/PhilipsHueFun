@@ -37,7 +37,7 @@ class HueLightController extends React.Component<HueLightControllerProps, HueLig
     this.state.socket.on('stateChanged', (result: any) => {
       console.log('state Change:', result)
       console.log('old state:', this.state)
-      this.setState((prevState) => {
+      this.setState((prevState: HueLightControllerState) => {
         const t = {
           ...prevState.light.state,
           ...result
