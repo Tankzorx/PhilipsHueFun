@@ -1,7 +1,7 @@
 // import * as React from '../../../node_modules/@types/react';
 import * as React from 'react';
 
-import { HueLight } from '../HueOverview/HueOverview'
+import { HueLight, HueLightState } from '../HueOverview/HueOverview'
 import HueLightController from '../HueLightController/HueLightController'
 
 interface HueLightInfoProps {
@@ -22,8 +22,21 @@ class HueLightInfo extends React.Component<HueLightInfoProps, HueLightInfoState>
     super(props);
     this.state = { showDetails: false, light: props.light }
     this.handleShowDetails = this.handleShowDetails.bind(this)
+    this.onLightStateChange = this.onLightStateChange.bind(this)
   }
 
+  public onLightStateChange (newLightState: HueLightState) {
+    console.log("light state changed: ", newLightState)
+    this.setState( (prevState) => {
+        return {
+            light: {
+                state: {
+                    ...newLightState
+                }
+            }
+        }
+    })
+  }
 
   public handleShowDetails() {
     console.log("show details of :", this.state.light.name)
@@ -50,7 +63,7 @@ class HueLightInfo extends React.Component<HueLightInfoProps, HueLightInfoState>
 
   public render() {
     return (
-        <div className={`hue-light ${this.props.light.state.on ? 'on' : 'off'} flexcontainer`}
+        <div className={`hue-light ${this.state.light.state.on ? 'on' : 'off'} flexcontainer`}
             onClick={this.handleShowDetails}
         >
             <div >
@@ -62,7 +75,7 @@ class HueLightInfo extends React.Component<HueLightInfoProps, HueLightInfoState>
                         this.state.showDetails ? 
                         <div>
                             Details show!
-                            <HueLightController light={this.props.light}/>
+                            <HueLightController light={this.props.light} onLightStateChange={this.onLightStateChange}/>
                         </div>
                         :
                         <div>
