@@ -29,13 +29,9 @@ module.exports = function(grunt) {
     }
   });
 
-  // Load the plugin that provides the "uglify" task.
   grunt.loadNpmTasks('grunt-ts');
   grunt.loadNpmTasks('grunt-tslint');
   grunt.loadNpmTasks('grunt-contrib-copy');
-  
-  // Default task(s).
-  //grunt.registerTask('lint', ['tslint']);
   
   grunt.registerTask('default', ['ts', 'copy']);
 

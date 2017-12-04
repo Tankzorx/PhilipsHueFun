@@ -4,7 +4,8 @@
  * Module dependencies.
  */
 
-var app = require('../build/app');
+import app from './app'
+import { server as socketServer, initHueSockets } from './hueSockets/hueSockets'
 var debug = require('debug')('react-backend:server');
 var http = require('http');
 
@@ -25,9 +26,15 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+initHueSockets()
+
+socketServer.listen(8080)
+socketServer.on('listening', () => {
+  server.listen(port);
+  server.on('error', onError);
+  server.on('listening', onListening);
+})
+
 
 /**
  * Normalize a port into a number, string, or false.
