@@ -1,6 +1,12 @@
 // import * as React from '../../../node_modules/@types/react';
 import * as React from 'react';
 
+import './HueLightInfo.css'
+// const styles = require('./HueLightInfo..css')
+// import * as styles from "./HuelightInfo.css";
+// const Style = require<any>("./HuelightInfo.css");
+
+
 import { HueLight, HueLightState } from '../HueOverview/HueOverview'
 import HueLightController from '../HueLightController/HueLightController'
 
@@ -68,20 +74,12 @@ class HueLightInfo extends React.Component<HueLightInfoProps, HueLightInfoState>
         >
             <div >
                 <div className="lightProps">
-                    <h2>
+                    <h2 className="lightName">
                         { this.props.light.name}
                     </h2>
-                    {
-                        this.state.showDetails ? 
-                        <div>
-                            Details show!
-                            <HueLightController light={this.props.light} onLightStateChange={this.onLightStateChange}/>
-                        </div>
-                        :
-                        <div>
-                            Details hide!
-                        </div>
-                    }
+                    <div className="lightSwitchButton">
+                        <HueLightController light={this.props.light} onLightStateChange={this.onLightStateChange}/>
+                    </div>
                 </div>
             </div>
         </div>

@@ -5,6 +5,7 @@ import config from '../config'
 export const server = require('http').createServer();
 // var io = require("socket.io")(server)
 import * as io from 'socket.io'
+import { request } from "http";
 
 const ioServer = io(server)
 
@@ -24,20 +25,29 @@ export const initHueSockets = () => {
 
 function createLightSocket(light) {
   console.log('Creating socket for light: ', light.id)
-  const lightSocket = ioServer.of(`/${light.id}`)
+  const lightSocket: SocketIO.Namespace = ioServer.of(`/${light.id}`)
   lightSocket.on('connection', (socket) => {
+    console.log(`Connected light '${light.id}'`)
     configureSocket(socket, light)
   })
 }
 
 function configureSocket(socket: SocketIO.Socket, light) {
-  console.log(`Connected light '${light.id}'`)
   socket.on('disconnect', () => { console.log(`Disconnected light '${light.id}'`) })
   socket.on('requestStateChange', (requestedState) => {
+    handleStateChangeRequest(requestedState, light, socket)
+  })
+}
+
+function handleStateChangeRequest(requestedState, light, socket) {
     console.log(`New request for lamp: ${light.id}! \n ${JSON.stringify(requestedState)}`)
     hueApi.setLightState(light.id, requestedState)
-    .then((result) => {
-      socket.emit('stateChanged', requestedState)
+    .then((result: boolean) => {
+      console.log(result)
+      if (result) {
+        socket.emit('stateChanged', { requestedState, success: true })
+      } else {
+        socket.emit('stateChanged', { requestedState, success: false})
+      }
     })
-  })
 }

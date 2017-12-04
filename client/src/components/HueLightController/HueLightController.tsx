@@ -39,19 +39,23 @@ class HueLightController extends React.Component<HueLightControllerProps, HueLig
       }
     })
 
-    this.state.socket.on('stateChanged', (result: any) => {
+    this.state.socket.on('stateChanged', (result: { requestedState: any, success: boolean}) => {
       console.log('state Change:', result)
       console.log('old state:', this.state)
-      this.setStateWrapper((prevState: HueLightControllerState) => {
-        return {
-          light: {
-            state: {
-              ...prevState.light.state,
-              ...result
+      if (result.success) {
+        this.setStateWrapper((prevState: HueLightControllerState) => {
+          return {
+            light: {
+              state: {
+                ...prevState.light.state,
+                ...result.requestedState
+              }
             }
           }
-        }
-      })
+        })
+      } else {
+
+      }
     })
   }
 
@@ -76,9 +80,6 @@ class HueLightController extends React.Component<HueLightControllerProps, HueLig
   public render() {
     return (
         <div className="lightState">
-          <code>
-            { JSON.stringify(this.state.light.state) }
-          </code>
           <button onClick={this.handleSwitch}>
             Turn { (!this.state.light.state.on) ? 'on' : 'off'}
           </button>

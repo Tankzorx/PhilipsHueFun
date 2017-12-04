@@ -1,0 +1,10 @@
+.lightName {
+    float: left;
+    display: block;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.lightSwitchButton {
+    float: left;
+}
