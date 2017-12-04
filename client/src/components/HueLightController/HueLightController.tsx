@@ -2,6 +2,8 @@
 import * as React from 'react';
 import * as io from 'socket.io-client'
 
+import "./HueLightController.css";
+
 import { HueLight } from '../HueOverview/HueOverview'
 
 interface HueLightControllerState {

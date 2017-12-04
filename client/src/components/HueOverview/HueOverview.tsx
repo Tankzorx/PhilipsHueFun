@@ -63,7 +63,7 @@ class HueRegister extends React.Component<HueInfoProps, HueInfoState> {
     })
 
     return (
-      <div className="HueInfo">
+      <div className="hueoverview">
         <div>
           { 
             lightComponents

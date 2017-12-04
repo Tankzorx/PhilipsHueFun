@@ -1,15 +1,5 @@
-.HueInfo {
+.hueoverview {
     background-color: rgba(0, 153, 255, 0.856);
-}
-
-.HueLightInfo {
-    display: block;
-}
-
-.hue-light {
-    border: 1px rgba(94, 92, 92, 0.384) solid;
-    margin: 5px 5px;
-    padding: 10px;
 }
 
 .flexcontainer {
@@ -26,5 +16,5 @@
 }
 
 .off {
-    background-color: rgba(255, 146, 146, 0.397);
+    background-color: rgba(43, 43, 43, 0.856);
 }

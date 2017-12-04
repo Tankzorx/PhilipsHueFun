@@ -3,8 +3,45 @@
     display: block;
     margin-top: 0px;
     margin-bottom: 0px;
+    color: rgb(102, 102, 102);
 }
 
 .lightSwitchButton {
     float: left;
+}
+
+.hue-light {
+    border: 1px rgba(94, 92, 92, 0.384) solid;
+    margin: 5px 5px;
+    padding: 10px;
+    min-width: 300px;
+    min-height: 150px;
+}
+
+.HueLightInfo {
+    display: block;
+}
+
+.flexcontainer {
+    display: flex;
+    display: -webkit-flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.square-flex-item {
+    width: 50px;
+    height: 40px;
+    background-color: white;
+    margin: 1px;
+    border: 1px black;
+}
+
+.wide-flex-item {
+    width: 150px;
+    height: 40px;
+    background-color: white;
+    margin: 1px;
+    border: 2px solid black;
 }

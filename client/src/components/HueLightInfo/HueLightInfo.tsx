@@ -70,17 +70,58 @@ class HueLightInfo extends React.Component<HueLightInfoProps, HueLightInfoState>
   public render() {
     return (
         <div className={`hue-light ${this.state.light.state.on ? 'on' : 'off'} flexcontainer`}
-            onClick={this.handleShowDetails}
-        >
-            <div >
-                <div className="lightProps">
-                    <h2 className="lightName">
-                        { this.props.light.name}
-                    </h2>
-                    <div className="lightSwitchButton">
-                        <HueLightController light={this.props.light} onLightStateChange={this.onLightStateChange}/>
-                    </div>
+            onClick={this.handleShowDetails} >
+            <h2 className={`lightName wide-flex-item`}>
+                { this.props.light.name}
+            </h2>
+            <div className="lightSwitchButton square-flex-item">
+                    <HueLightController light={this.props.light} onLightStateChange={this.onLightStateChange}/>
                 </div>
+            {/* <div className="lightProps"> */}
+                
+            
+            {/* </div> */}
+            <div className="square-flex-item">
+                short block
+            </div>
+            <div className="wide-flex-item">
+                long block 
+            </div>
+            <div className="wide-flex-item">
+                long block 
+            </div>
+            <div className="wide-flex-item">
+                long block 
+            </div>
+            <div className="wide-flex-item">
+                long block 
+            </div>
+            <div className="wide-flex-item">
+                long block 
+            </div>
+            <div className="wide-flex-item">
+                long block 
+            </div>
+            <div className="wide-flex-item">
+                long block 
+            </div>
+            <div className="wide-flex-item">
+                long block 
+            </div>
+            <div className="wide-flex-item">
+                long block 
+            </div>
+            <div className="wide-flex-item">
+                long block 
+            </div>
+            <div className="wide-flex-item">
+                long block 
+            </div>
+            <div className="wide-flex-item">
+                long block 
+            </div>
+            <div className="wide-flex-item">
+                long block 
             </div>
         </div>
     )
