@@ -1,7 +1,4 @@
-node_modules/**
-client/node_modules/**
-react-backend/node_modules/**
+**/node_modules/**
 build/**
-react-backend/build/**
+server/build/**
 **/.tscache/**
-.vscode/**
