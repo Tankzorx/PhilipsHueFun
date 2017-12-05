@@ -1,4 +1,9 @@
 export default {
-    bridgeIp: "BRIDGE_IP",
-    username: "USER_ID"
+    bridgeIp: "IP",
+    username: "USERNAME"
+}
+
+export const facebookDetails = {
+    email: 'INSERT_EMAIL',
+    password: 'INSERT_PASSWORD'
 }
