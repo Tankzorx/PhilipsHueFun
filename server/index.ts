@@ -6,6 +6,7 @@
 
 import app from './app'
 import { server as socketServer, initHueSockets } from './hueSockets/hueSockets'
+import { setupBot } from './fbBot/bot'
 var debug = require('debug')('react-backend:server');
 var http = require('http');
 
@@ -13,8 +14,9 @@ var http = require('http');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3001');
-app.set('port', port);
+var serverPort = normalizePort(process.env.SERVER_PORT || '3001');
+var hueSocketPort = normalizePort(process.env.HUE_PORT || '8080');
+app.set('port', serverPort);
 
 /**
  * Create HTTP server.
@@ -28,11 +30,20 @@ var server = http.createServer(app);
 
 initHueSockets()
 
-socketServer.listen(8080)
+socketServer.listen(hueSocketPort)
 socketServer.on('listening', () => {
-  server.listen(port);
-  server.on('error', onError);
-  server.on('listening', onListening);
+  console.log('Hue sockets listening');
+  console.log('Initializing Facebook bot')
+  setupBot((err) => {
+    if (err) {
+      console.log('Error when starting facebook bot:')
+      console.log(err)
+    }
+    console.log('Facebook bot operational.')
+    server.listen(serverPort);
+    server.on('error', onError);
+    server.on('listening', onListening);
+  })
 })
 
 
@@ -65,9 +76,9 @@ function onError(error) {
     throw error;
   }
 
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+  var bind = typeof serverPort === 'string'
+    ? 'Pipe ' + serverPort
+    : 'Port ' + serverPort;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
