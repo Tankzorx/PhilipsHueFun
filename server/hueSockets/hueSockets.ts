@@ -1,7 +1,7 @@
 import { HueApi, lightState } from "node-hue-api"
 
 
-import config from '../config'
+import { hueInfo } from '../config'
 export const server = require('http').createServer();
 // var io = require("socket.io")(server)
 import * as io from 'socket.io'
@@ -13,7 +13,7 @@ const ioServer = io(server)
  * Set up hue api and socket.io
  */
   
-const hueApi = new HueApi(config.bridgeIp, config.username);
+const hueApi = new HueApi(hueInfo.bridgeIp, hueInfo.username);
 
 export const initHueSockets = () => {
   hueApi.lights().then( (result) => {

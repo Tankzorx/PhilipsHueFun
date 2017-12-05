@@ -2,9 +2,9 @@ import { HueApi, lightState } from "node-hue-api"
 var express = require('express');
 var router = express.Router();
 
-import config from '../config'
+import { hueInfo } from '../config'
 
-const hueApi = new HueApi(config.bridgeIp, config.username);
+const hueApi = new HueApi(hueInfo.bridgeIp, hueInfo.username);
 
 router.get('/', function(req, res, next) {
   res.send("hueRoutes")
